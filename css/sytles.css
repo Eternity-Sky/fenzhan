@@ -189,3 +189,28 @@ a:hover {
     color: #e0f7fa;
     text-decoration: none;
 }
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 确保整个页面的最小高度 */
+    margin: 0; /* 去掉默认边距 */
+}
+
+.content {
+    flex: 1; /* 主内容区自适应高度 */
+}
+
+.footer {
+    text-align: center;
+    margin-top: auto; /* 自动推到页面底部 */
+    color: white; /* 文字颜色 */
+    font-family: 'Arial', sans-serif; /* 字体样式 */
+    background-color: rgba(0, 0, 0, 0.7); /* 添加半透明背景 */
+    padding: 20px; /* 增加内边距 */
+    position: relative; /* 相对定位 */
+    z-index: 1; /* 确保在上层 */
+}
+
+.footer p {
+    margin: 0; /* 去掉段落的默认边距 */
+}
