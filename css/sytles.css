@@ -1,14 +1,139 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f4f8;
     margin: 0;
-    padding: 20px;
-    line-height: 1.6;
+    padding: 0;
+    overflow: hidden;
+}
+
+.waterflow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, #00c6ff, #0072ff);
+    background-size: 400% 400%;
+    animation: flow 10s ease infinite;
+}
+
+@keyframes flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.character {
+    position: absolute;
+    width: 30px; /* 身体宽度 */
+    height: 80px; /* 身体高度 */
+    bottom: 10%; /* 距离底部的距离 */
+    animation: move 4s linear infinite alternate;
+}
+
+.left {
+    left: 10%; /* 左侧位置 */
+}
+
+.right {
+    right: 10%; /* 右侧位置 */
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0); /* 正常位置 */
+    }
+    50% {
+        transform: translateY(-10px); /* 向上移动 */
+    }
+    100% {
+        transform: translateY(0); /* 返回正常位置 */
+    }
+}
+
+/* 火柴人形象 */
+.character::before, .character::after {
+    content: '';
+    position: absolute;
+    background: black; /* 四肢颜色 */
+}
+
+.character::before { /* 身体 */
+    width: 6px;
+    height: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.character::after { /* 头部 */
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: black;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 手臂 */
+.arm-left, .arm-right {
+    position: absolute;
+    width: 40px; /* 手臂长度 */
+    height: 6px; /* 手臂宽度 */
+    background: black; /* 手臂颜色 */
+}
+
+.arm-left {
+    top: 20px; /* 距离身体顶部的距离 */
+    left: -20px; /* 向左伸展 */
+    transform-origin: right; /* 关节在右侧 */
+    transform: rotate(45deg); /* 弯曲角度 */
+}
+
+.arm-right {
+    top: 20px; /* 距离身体顶部的距离 */
+    right: -20px; /* 向右伸展 */
+    transform-origin: left; /* 关节在左侧 */
+    transform: rotate(-45deg); /* 弯曲角度 */
+}
+
+/* 羽毛球拍 */
+.racket {
+    position: absolute;
+    width: 10px; /* 拍柄宽度 */
+    height: 50px; /* 拍柄高度 */
+    background: brown; /* 拍柄颜色 */
+    top: 10px; /* 距离身体顶部的距离 */
+    left: 15px; /* 拍柄位置 */
+    border-radius: 5px; /* 拍柄圆角 */
+}
+
+/* 拍面 */
+.racket::after {
+    content: '';
+    position: absolute;
+    width: 40px; /* 拍面的宽度 */
+    height: 10px; /* 拍面的高度 */
+    background: lightgrey; /* 拍面的颜色 */
+    top: -10px; /* 拍面位置 */
+    left: -15px; /* 拍面位置 */
+    border-radius: 5px; /* 拍面圆角 */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding-top: 50px;
+    font-family: 'Arial', sans-serif;
 }
 
 h1 {
-    color: #333;
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -17,29 +142,50 @@ ul {
     padding: 0;
     max-width: 600px;
     margin: 0 auto;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 li {
     margin: 15px 0;
     padding: 10px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.3s;
+    border-radius: 5px;
 }
 
 li:hover {
-    background-color: #e0f7fa;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
 a {
     text-decoration: none;
-    color: #007bff;
+    color: #ffffff;
     font-weight: bold;
     display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: #00c6ff;
+    transition: width 0.4s ease, left 0.4s ease;
+}
+
+a:hover::after {
+    width: 100%;
+    left: 0;
 }
 
 a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+    color: #e0f7fa;
+    text-decoration: none;
 }
